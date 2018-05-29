@@ -8,7 +8,9 @@
   <%= event_data ["Venue"]["Address"] %>
   <p><%= event_data["Description"] %></p>
   <%= form_tag save_path(@user.id), method: 'post' do%>
-    <% params[:user][:title] = event_data["Name"]%>
+  <%= text_field_tag 'title' ,  params[:titleeee] %>
+  <%= hidden_field_tag 'name', event_data["Name"] %>
+    <% params[:title] = event_data["Name"]%>
     <% params[:venue_name] = event_data["Venue"]["Name"]%>
     <% params[:address] = event_data ["Venue"]["Address"]%>
     <% params[:description] = event_data["Description"]%>
