@@ -7,11 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-u1 = User.create(user_name:"u1", full_name:"user one", email:"u1@u1.com")
-u2 = User.create(user_name:"u2", full_name:"user two", email:"u2@u2.com")
-u3 = User.create(user_name:"u3", full_name:"user three", email:"u3@u3.com")
-u4 = User.create(user_name:"u4", full_name:"user four", email:"u4@u4.com")
-u5 = User.create(user_name:"u5", full_name:"user five", email:"u5@u5.com")
+u1 = User.create(user_name:"u1", full_name:"user one", email:"u1@u1.com", password:"123")
+u2 = User.create(user_name:"u2", full_name:"user two", email:"u2@u2.com",password:"abc")
+u3 = User.create(user_name:"u3", full_name:"user three", email:"u3@u3.com", password:"efg")
+u4 = User.create(user_name:"u4", full_name:"user four", email:"u4@u4.com", password:"xyz")
+u5 = User.create(user_name:"u5", full_name:"user five", email:"u5@u5.com", password:"123xyz")
 
 c1 = Category.create(name:"Art")
 c2 = Category.create(name:"Concert")
