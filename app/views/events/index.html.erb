@@ -1,0 +1,8 @@
+<h3>Check out all these events</h3>
+
+<ul>
+  <% @events.each do |event| %>
+    <h3> <%= link_to event.title, event_path(event)%> </h3>
+    <li> <%= event.location.neighborhood %> </li><br>
+  <% end %>
+</ul>

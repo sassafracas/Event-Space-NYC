@@ -7,11 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-u1 = User.create(user_name:"u1", full_name:"user one", email:"u1@u1.com")
-u2 = User.create(user_name:"u2", full_name:"user two", email:"u2@u2.com")
-u3 = User.create(user_name:"u3", full_name:"user three", email:"u3@u3.com")
-u4 = User.create(user_name:"u4", full_name:"user four", email:"u4@u4.com")
-u5 = User.create(user_name:"u5", full_name:"user five", email:"u5@u5.com")
+u1 = User.create(user_name:"u1", full_name:"user one", email:"u1@u1.com", password:"123")
+u2 = User.create(user_name:"u2", full_name:"user two", email:"u2@u2.com",password:"abc")
+u3 = User.create(user_name:"u3", full_name:"user three", email:"u3@u3.com", password:"efg")
+u4 = User.create(user_name:"u4", full_name:"user four", email:"u4@u4.com", password:"xyz")
+u5 = User.create(user_name:"u5", full_name:"user five", email:"u5@u5.com", password:"123xyz")
 
 c1 = Category.create(name:"Art")
 c2 = Category.create(name:"Concert")
@@ -31,3 +31,16 @@ e4 = Event.create(title: "Arts again", description:"parks", location:l3, categor
 e5 = Event.create(title: "Sing with Sang", description:"as title", location:l3, category:c2)
 e6 = Event.create(title: "Art with Aleks", description:"as title", location:l1, category:c1)
 e7 = Event.create(title: "together ", description:"as title", location:l3, category:c3)
+
+u1.events << e1
+u1.events << e2
+u1.events << e3
+u1.events << e4
+
+u2.events << e2
+u2.events << e3
+u2.events << e5
+
+u3.events << e1
+u3.events << e2
+u3.events << e5
