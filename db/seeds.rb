@@ -31,3 +31,16 @@ e4 = Event.create(title: "Arts again", description:"parks", location:l3, categor
 e5 = Event.create(title: "Sing with Sang", description:"as title", location:l3, category:c2)
 e6 = Event.create(title: "Art with Aleks", description:"as title", location:l1, category:c1)
 e7 = Event.create(title: "together ", description:"as title", location:l3, category:c3)
+
+u1.events << e1
+u1.events << e2
+u1.events << e3
+u1.events << e4
+
+u2.events << e2
+u2.events << e3
+u2.events << e5
+
+u3.events << e1
+u3.events << e2
+u3.events << e5
