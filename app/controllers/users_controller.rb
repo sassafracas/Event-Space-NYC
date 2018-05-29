@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :get_user, only:[:show, :edit, :update, :destroy]
 
   def home
-    
+
   end
 
   def new
