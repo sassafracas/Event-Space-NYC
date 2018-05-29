@@ -1,0 +1,17 @@
+<h1>Sign Up!</h1>
+
+<%= render 'errors/flash_errors' %>
+
+<%= form_for @user do |f| %>
+  <%= f.label :user_name %>
+  <%= f.text_field :user_name %>
+  <%= f.label :full_name %>
+  <%= f.text_field :full_name%>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
+  <%= f.submit "Sign Up" %>
+<% end %>

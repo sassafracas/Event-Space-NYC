@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :get_user, only:[:show, :edit, :update, :destroy]
-
+  before_action :get_user, only:[:show, :edit, :update, :destroy, :save]
+  before_action :authorized, only: [:edit]
   def home
 
   end
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
     else
       flash[:errors] = @user.errors.full_messages
-      redirect_to new_user_path
+      redirect_to signup_path
     end
   end
 
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+
 
   end
 
@@ -41,6 +42,11 @@ class UsersController < ApplicationController
 
   end
 
+  def save
+    @event = Event.create(event_params)
+    byebug
+  end
+
   private
 
   def get_user
@@ -50,4 +56,9 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:user_name, :full_name, :email, :password)
   end
+
+   def event_params
+     byebug
+     params.require(:user).permit(:title, :venue_name, :address, :description)
+   end
 end

@@ -3,7 +3,7 @@ require 'json'
 require 'net/http'
 require 'active_support'
 require 'active_support/core_ext'
-require 'pry'
+# require 'pry'
 
 
 def parse_api(link)

@@ -1,8 +1,10 @@
 <h3><%= @user.full_name %>'s events</h3>
 
+<% if current_user.id == @user.id %>
 <ul>
   <% @user.events.each do |event| %>
     <h3> <%= link_to event.title, event_path(event)%> </h3>
     <li> <%= event.location.neighborhood %> </li><br>
   <% end %>
 </ul>
+<% end %>
