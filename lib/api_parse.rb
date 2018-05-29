@@ -14,13 +14,10 @@ def parse_api(link)
 end
 
 
-def nyartbeat_parse(free=1)
-  geo= {}
-  geo['lat'] = 40.719130
-  geo['lng'] = -73.980000
+def nyartbeat_parse(geo , free=1)
   link = "http://www.nyartbeat.com/list/event_searchNear?latitude=#{geo['lat']}&longitude=#{geo['lng']}&MaxResults=10&SortOrder=distance&free=#{free}"
   s = Net::HTTP.get_response(URI.parse(link)).body
-  binding.pry
+  # binding.pry
   data = JSON.parse(Hash.from_xml(s).to_json)
 end
 
@@ -46,8 +43,8 @@ end
 geo= {}
 geo['lat'] = 40.719130
 geo['lng'] = -73.980000
-geo_to_address(geo)
+puts geo_to_address(geo)
 
-# address_to_geo("flatiron school, manhattan, new york")
+puts address_to_geo("flatiron school, manhattan, new york")
 
 # nyartbeat_parse
