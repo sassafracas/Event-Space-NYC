@@ -6,7 +6,9 @@
   <h2><%= event_data["title"] %></h2>
   <%= event_data["venue"]%>
   <%= event_data["address"] %>
-  <%= event_data["address"] %>
+  Hours:<%= event_data["hours"] %>
+  Date:<%= event_data["date"] %>
+  <%= event_data["price"] %>
 
   <p><%= truncate(event_data["description"], length: 300, separator: " ")
 

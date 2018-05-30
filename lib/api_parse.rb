@@ -25,7 +25,7 @@ def address_to_geo(address)
   geo= {}
   geo['lat'] = 40.7319579
   geo['lng'] = -73.9768964
-  byebug
+  # byebug
   link = 'https://maps.googleapis.com/maps/api/geocode/json?address='
   key= '&key=AIzaSyB8y9s45xVG7OAhCdYa14p80sQBEiKEgV8'
   address = address.gsub(' ', '+')
