@@ -39,15 +39,28 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    # byebug
+    event = @user.events.find(params[:event_id])
 
+    if event
+      @user.events.delete(event)
+      redirect_to @user
+    end
   end
 
   def save
     # byebug
-    @event = @@search_results[params["event_id"].to_i]
-    @event.save
-    @user.events << @event
-    redirect_to @event
+    if params["event_id"] != nil
+      @event = @@search_results[params["event_id"].to_i]
+      @event.save
+    else
+      @event = Event.find(params["database_event_id"].to_i)
+    end
+    if !@user.events.include?(@event)
+      @user.events << @event
+    end
+
+    redirect_to @user
   end
 
   private

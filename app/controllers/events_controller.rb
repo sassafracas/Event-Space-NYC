@@ -44,7 +44,7 @@ class EventsController < ApplicationController
     hash["description"]=event["Description"]
     hash["price"]=event["Venue"]["Price"]
     hash["date"]=Date.strptime(event["DateStart"]).strftime('%a, %B %d, %Y') + " to " +  Date.strptime(event["DateEnd"]).strftime('%a, %B %d, %Y')
-    hash["hours"]=event["Venue"]["OpeningHour"]+" - "+event["Venue"]["ClosingHour"]
+    hash["hours"]=Time.strptime(event["Venue"]["OpeningHour"],'%H:%M').strftime('%l:%M %p')+" - "+Time.strptime(event["Venue"]["ClosingHour"],'%H:%M').strftime('%l:%M %p')
     geo = address_to_geo(hash['address'])
     hash["location"] = Location.find_or_create_by(latitude:geo['lat'],longitude:geo['lng'],neighborhood:geo_to_neighborhood(geo))
     hash["category"] = Category.find_by(name:"Art")

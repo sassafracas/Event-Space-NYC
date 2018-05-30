@@ -5,6 +5,10 @@
   <% @user.events.each do |event| %>
     <h3> <%= link_to event.title, event_path(event)%> </h3>
     <li> <%= event.location.neighborhood %> </li><br>
+
+    <%= form_tag user_path(@user.id), method: "delete" %>
+    <%= hidden_field_tag "event_id", event.id %>
+    <%= submit_tag "Delete this Event" %>
   <% end %>
 </ul>
 <% end %>

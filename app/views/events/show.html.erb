@@ -5,6 +5,11 @@
 <p>Description: <%= @event.description%> </p>
 <p>Latitude: <%= @event.location.latitude %> </p>
 <p>Longitude <%= @event.location.longitude %> </p>
+<%= form_tag save_path(current_user), method: 'post' do%>
+  <%= hidden_field_tag "database_event_id", @event.id %>
+  <%= submit_tag "Save Event" %>
+<% end %><br>
 
 
+<%= link_to "Back to Search Results", display_path %><br>
 <%= link_to "All Events", events_path %>
