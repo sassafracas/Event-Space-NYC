@@ -6,6 +6,15 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def show
+    @events = Event.all
+    @hash = Gmaps4rails.build_markers(@events) do |event, marker|
+      marker.lat event.location.latitude
+      marker.lng event.location.longitude
+    end
+
+  end
+
   def search
   end
 

@@ -64,3 +64,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'activesupport'
 gem 'json'
 gem "rest-client"
+gem 'gmaps4rails'
