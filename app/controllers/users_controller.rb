@@ -43,9 +43,10 @@ class UsersController < ApplicationController
   end
 
   def save
-    @event = Event.create(event_params)
-    @user.events << @event
     # byebug
+    @event = @@search_results[params["event_id"].to_i]
+    @event.save
+    @user.events << @event
     redirect_to @event
   end
 

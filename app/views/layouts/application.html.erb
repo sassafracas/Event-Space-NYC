@@ -12,6 +12,7 @@
   <body>
     <% if logged_in? %>
       Hello, <%=current_user.user_name  %>
+      <%= link_to "Show all saved events", current_user %>
       <%= link_to "Log Out", logout_path, method: :post %>
       <%= link_to "Search", search_path %>
 

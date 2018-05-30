@@ -2,16 +2,18 @@ require "./lib/api_parse"
 
 class EventsController < ApplicationController
 
-  # before_action :get_event, only: [:show]
+  before_action :get_event, only: [:show]
   def index
     @events = Event.all
   end
 
   def search
+    empty_search
   end
 
   def info
-    byebug
+    # byebug
+    @event = @@search_results[params[:id].to_i]
   end
 
   def results
@@ -20,7 +22,13 @@ class EventsController < ApplicationController
     y = address_to_geo(params[:search])
     data = nyartbeat_parse(y, 0)
     @events_from_search = data["Events"]["Event"]
-    @events_from_search.each{|e| new_event(e)}
+    @events_from_search.each{|e| new_event(e)} if @@search_results.empty?
+    @events = @@search_results
+    redirect_to display_path
+  end
+
+  def display
+    @user = current_user
     @events = @@search_results
   end
 

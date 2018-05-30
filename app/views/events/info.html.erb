@@ -1,0 +1,9 @@
+<h3><%= @event.title %></h3>
+
+<p>Address: <%=@event.address%> </p>
+<p>Neighborhood: <%= @event.location.neighborhood %> </p>
+<p>Description: <%= @event.description%> </p>
+<p>Latitude: <%= @event.location.latitude %> </p>
+<p>Longitude <%= @event.location.longitude %> </p>
+
+<%= link_to "Back to Results", display_path %>
