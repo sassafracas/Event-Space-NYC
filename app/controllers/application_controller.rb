@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
 require 'pry'
+@@search_results = []
+
 helper_method :current_user, :logged_in?
 
   def current_user
