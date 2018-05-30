@@ -44,7 +44,8 @@ class UsersController < ApplicationController
 
   def save
     @event = Event.create(event_params)
-    byebug
+    # byebug
+    redirect_to @event
   end
 
   private
@@ -58,7 +59,15 @@ class UsersController < ApplicationController
   end
 
    def event_params
-     byebug
-     params.require(:user).permit(:title, :venue_name, :address, :description)
+     # byebug
+     event={}
+     event["title"] = params["title"]
+     event["address"] = params["address"]
+     event["description"] = params["description"]
+     geo = address_to_geo(event['address'])
+     event["location"] = Location.find_or_create_by(latitude:geo['lat'],longitude:geo['lng'],neighborhood:geo_to_neighborhood(geo))
+     event["category"] = Category.find_by(name:"Art")
+     # params.require(:user).permit(:title, :venue_name, :address, :description)
+     event
    end
 end

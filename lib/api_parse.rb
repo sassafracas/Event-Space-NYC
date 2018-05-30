@@ -3,7 +3,7 @@ require 'json'
 require 'net/http'
 require 'active_support'
 require 'active_support/core_ext'
-# require 'pry'
+require 'pry'
 
 
 def parse_api(link)
@@ -26,8 +26,8 @@ def address_to_geo(address)
   key= '&key=AIzaSyB8y9s45xVG7OAhCdYa14p80sQBEiKEgV8'
   address = address.gsub(' ', '+')
   link = link + address + key
-  # binding.pry
   data = parse_api(link)
+  # binding.pry
   data['results'][0]['geometry']['location']
 end
 
@@ -36,15 +36,25 @@ def geo_to_address(geo)
   key= '&key=AIzaSyB8y9s45xVG7OAhCdYa14p80sQBEiKEgV8'
   link = link + geo['lat'].to_s + ","+ geo['lng'].to_s + key
   data = parse_api(link)
-  # binding.pry
   data["results"][0]["formatted_address"]
+end
+
+def geo_to_neighborhood(geo)
+  link = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='
+  key= '&key=AIzaSyB8y9s45xVG7OAhCdYa14p80sQBEiKEgV8'
+  link = link + geo['lat'].to_s + ","+ geo['lng'].to_s + key
+  data = parse_api(link)
+  n=data["results"][0]["address_components"].select{|c| c.values.flatten.include?("neighborhood")}
+  # binding.pry
+  n[0]["long_name"]
 end
 
 geo= {}
 geo['lat'] = 40.7319579
 geo['lng'] = -73.9768964
 puts geo_to_address(geo)
+puts geo_to_neighborhood(geo)
 
 y = address_to_geo("18 Stuyvesant Oval, new york, new york")
-
-puts nyartbeat_parse(y, 0)
+puts y
+# puts nyartbeat_parse(y, 0)
