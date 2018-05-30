@@ -10,10 +10,10 @@
   Date:<%= event_data["date"] %>
   <%= event_data["price"] %>
 
-  <p><%= truncate(event_data["description"], length: 300, separator: " ")
+  <p><%= truncate(event_data["description"], length: 300, separator: " ")%>
+    <%= link_to "See more", controller: "events", action: "info", data: event_data %>
 
-
-   %></p>
+   </p>
   <%= form_tag save_path(@user.id), method: 'post' do%>
     <%= submit_tag "Save Event" %>
   <% end %>

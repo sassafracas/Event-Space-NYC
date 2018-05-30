@@ -2,7 +2,7 @@ require "./lib/api_parse"
 
 class EventsController < ApplicationController
 
-  before_action :get_event, only: [:show]
+  # before_action :get_event, only: [:show]
   def index
     @events = Event.all
   end
@@ -10,18 +10,23 @@ class EventsController < ApplicationController
   def search
   end
 
+  def info
+    byebug
+  end
+
   def results
-    @events = []
+
     @user = current_user
     y = address_to_geo(params[:search])
     data = nyartbeat_parse(y, 0)
     @events_from_search = data["Events"]["Event"]
-    @events_from_search.each{|e| @events << save_event(e)}
+    @events_from_search.each{|e| new_event(e)}
+    @events = @@search_results
   end
 
   private
 
-  def save_event(event)
+  def new_event(event)
     hash = {}
     # byebug
 
@@ -36,7 +41,8 @@ class EventsController < ApplicationController
     hash["location"] = Location.find_or_create_by(latitude:geo['lat'],longitude:geo['lng'],neighborhood:geo_to_neighborhood(geo))
     hash["category"] = Category.find_by(name:"Art")
     # byebug
-    Event.find_or_create_by(hash)
+    new_event= Event.new(hash)
+    @@search_results << new_event
   end
 
   def get_event

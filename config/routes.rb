@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 get 'search', to: 'events#search', as: 'search'
 post 'events/search', to: 'events#results', as: 'results'
 post 'users/:id', to: 'users#save', as: 'save'
+get 'events/info', to: 'events#info'
   resources :events
   resources :locations
   resources :categories
