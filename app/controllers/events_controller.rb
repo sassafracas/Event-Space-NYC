@@ -7,6 +7,10 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def show
+    @events = @@search_results
+  end
+
   def search
     empty_search
   end

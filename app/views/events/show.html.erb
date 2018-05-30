@@ -11,5 +11,7 @@
 <% end %><br>
 
 
+<% if @events.count >0 %>
 <%= link_to "Back to Search Results", display_path %><br>
+<% end %>
 <%= link_to "All Events", events_path %>
