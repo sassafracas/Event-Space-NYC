@@ -1,5 +1,11 @@
 <%= form_tag results_path, :method => 'post' do %>
-<%= text_field_tag :search, params[:search], placeholder: 'Enter Your Address Here' %>
+<%= text_field_tag :search, params[:search], placeholder: 'Enter the Location Here' %>
+<%= radio_button_tag 'search_type', 'Art' %> <label for="Art">Art</label>
+<%= radio_button_tag 'search_type', 'Food' %>  <label for="Food">Food</label>
+
+
+
+
 <%= submit_tag 'Search' %>
 <% end %>
 

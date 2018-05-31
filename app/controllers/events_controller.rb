@@ -34,6 +34,10 @@ class EventsController < ApplicationController
   def info
     # byebug
     @event = @@search_results[params[:id].to_i]
+    geo={}
+    geo['lat'] = @event.location.latitude
+    geo['lng'] = @event.location.longitude
+    @event.location.neighborhood = geo_to_neighborhood(geo)
     @events =[]
     @events << @event
     @hash = Gmaps4rails.build_markers(@events) do |event, marker|
@@ -46,20 +50,42 @@ class EventsController < ApplicationController
   def results
 
     @user = current_user
-    y = address_to_geo(params[:search])
-    data = nyartbeat_parse(y, 0)
-    @events_from_search = data["Events"]["Event"]
+    geo = address_to_geo(params[:search])
+    # binding.pry
+
+    case params["search_type"]
+    when "Art"
+      data = nyartbeat_parse(geo, 0)
+      @events_from_search = data["Events"]["Event"]
+    when "Food"
+      data = eventbrite(geo)
+      @events_from_search = data["events"]
+    when "Music"
+    end
+
 
     if @events_from_search == nil
       flash[:errors] = "Nothing found, please search again."
-
       redirect_to search_path
     else
+      loc = Location.find_or_create_by(latitude:geo['lat'],longitude:geo['lng'])
 
-    @events_from_search.each{|e| new_event(e)} if @@search_results.empty?
+      case params["search_type"]
+      when "Art"
+        art = Category.find_or_create_by(name: "Art")
+
+        @events_from_search.each{|e| new_event(e,art,loc)} if @@search_results.empty?
+
+      when "Food"
+        food = Category.find_or_create_by(name: "Food")
+
+        @events_from_search.each{|e| new_food_event(e, food, loc)} if @@search_results.empty?
+
+      end
+
     @events = @@search_results
     redirect_to display_path
-  end
+    end
   end
 
   def display
@@ -69,7 +95,7 @@ class EventsController < ApplicationController
 
   private
 
-  def new_event(event)
+  def new_event(event, art, loc)
     hash = {}
     # byebug
 
@@ -80,12 +106,35 @@ class EventsController < ApplicationController
     hash["price"]=event["Venue"]["Price"]
     hash["date"]=Date.strptime(event["DateStart"]).strftime('%a, %B %d, %Y') + " to " +  Date.strptime(event["DateEnd"]).strftime('%a, %B %d, %Y')
     hash["hours"]=Time.strptime(event["Venue"]["OpeningHour"],'%H:%M').strftime('%l:%M %p')+" - "+Time.strptime(event["Venue"]["ClosingHour"],'%H:%M').strftime('%l:%M %p')
-    geo = address_to_geo(hash['address'])
-    hash["location"] = Location.find_or_create_by(latitude:geo['lat'],longitude:geo['lng'],neighborhood:geo_to_neighborhood(geo))
-    hash["category"] = Category.find_by(name:"Art")
+    hash["location"] = loc
+    hash["category"] = art
     # byebug
     new_event= Event.new(hash)
     @@search_results << new_event
+  end
+
+  def new_food_event(event, food, loc)
+    # binding.pry
+    hash = {}
+    hash["title"]=event["name"]["text"]
+    # hash["venue"]=event["Venue"]["Name"]
+    hash["address"]=event["venue"]["address"]["localized_address_display"]
+    hash["description"]=event["description"]["text"]
+    start_time = event["start"]["local"].split("T")
+    end_time = event["end"]["local"].split("T")
+
+    hash["date"]=Date.strptime(start_time[0]).strftime('%a, %B %d, %Y') + " to " +  Date.strptime(end_time[0]).strftime('%a, %B %d, %Y')
+    hash["hours"]=Time.strptime(start_time[1],'%H:%M').strftime('%l:%M %p')+" - "+Time.strptime(end_time[1],'%H:%M').strftime('%l:%M %p')
+    hash["price"]=" "
+    loc.latitude = event["venue"]["address"]["latitude"].to_f
+    loc.longitude = event["venue"]["address"]["longitude"].to_f
+
+    hash["category"] = food
+    hash["location"] = loc
+
+    new_event= Event.new(hash)
+    @@search_results << new_event
+
   end
 
   def get_event
