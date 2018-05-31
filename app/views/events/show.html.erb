@@ -37,7 +37,9 @@ markers = handler.addMarkers(<%=raw @hash.to_json %>);
 
 </script>
 
-<% if @events.count >0 %>
-<%= link_to "Back to Search Results", display_path %><br>
-<% end %>
-<%= link_to "All Events", events_path %>
+<div class="links">
+  <% if @events.count >0 %>
+  <p><%= link_to "Back to Search Results", display_path %></p><br>
+  <% end %>
+  <p><%= link_to "All Events", events_path %></p>
+</div>
