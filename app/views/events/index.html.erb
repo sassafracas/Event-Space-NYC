@@ -2,7 +2,10 @@
 
 <ul>
   <% @events.each do |event| %>
-    <h3> <%= link_to event.title, event_path(event)%> </h3>
-    <li> <%= event.location.neighborhood %> </li><br>
+    <div class="each-event">
+      <h3><%= link_to event.title, event_path(event)%> </h3>
+      <p>Location: <%= event.location.neighborhood %> </p><br>
+    </div>
   <% end %>
+
 </ul>
