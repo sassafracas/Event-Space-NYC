@@ -158,10 +158,10 @@ class EventsController < ApplicationController
 
   def new_music_event(event, music, location)
     hash = {}
-    
+
     hash["title"]=event["name"]
     hash["venue"]=event["_embedded"]["venues"][0]["name"]
-    hash["address"]=event["_embedded"]["venues"][0]["address"]["line1"]
+    hash["address"]=event["_embedded"]["venues"][0]["address"]["line1"] + ", " + event["_embedded"]["venues"][0]["city"]["name"] + ", " + event["_embedded"]["venues"][0]["state"]["stateCode"]
     hash["description"]=event["url"]
     hash["price"]="$" + event["priceRanges"][0]["min"].to_s + "0" + " to " + "$" + event["priceRanges"][0]["max"].to_s + "0"
     hash["date"]=Date.strptime(event["dates"]["start"]["localDate"]).strftime('%a, %B %d, %Y') + " to " +  Date.strptime(event["dates"]["start"]["localDate"]).strftime('%a, %B %d, %Y')
