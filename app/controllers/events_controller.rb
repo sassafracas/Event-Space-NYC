@@ -24,19 +24,21 @@ class EventsController < ApplicationController
   def results
 #if event.category == music // event.category == art
     @user = current_user
-    y = address_to_geo(params[:search])
-    data = nyartbeat_parse(y, 0)
-    #   data = ticketmaster_parse(y)
-    #   @events_from_search = data["_embedded"]["events"]
-    @events_from_search = data["Events"]["Event"]
+    geo = address_to_geo(params[:search])
+    # data = nyartbeat_parse(y, 0)
+      data = ticketmaster_parse(geo)
+      @events_from_search = data["_embedded"]["events"]
+    # @events_from_search = data["Events"]["Event"]
 
     if @events_from_search == nil
       flash[:errors] = "Nothing found, please search again."
 
       redirect_to search_path
     else
-
-    @events_from_search.each{|e| new_event(e)} if @@search_results.empty?
+      music = Category.find_or_create_by(name:"Music")
+      location = Location.find_or_create_by(latitude:geo['lat'],longitude:geo['lng'])
+    # @events_from_search.each{|e| new_art_event(e)} if @@search_results.empty?
+    @events_from_search.each{|e| new_music_event(e, music, location)} if @@search_results.empty?
     @events = @@search_results
     redirect_to display_path
   end
@@ -49,7 +51,7 @@ class EventsController < ApplicationController
 
   private
 
-  def new_event(event)
+  def new_art_event(event)
     hash = {}
     # byebug
     #Change category depending on event category.
@@ -68,19 +70,22 @@ class EventsController < ApplicationController
     @@search_results << new_event
   end
 
-  def new_music_event(event)
+  def new_music_event(event, music, location)
     hash = {}
+
     hash["title"]=event["name"]
     hash["venue"]=event["_embedded"]["venues"][0]["name"]
     hash["address"]=event["_embedded"]["venues"][0]["address"]["line1"]
     hash["description"]=event["url"]
-    hash["price"]=event["priceRanges"][0]["min"] + " to " + event["priceRanges"][0]["max"]
+    hash["price"]=event["priceRanges"][0]["min"].to_s + " to " + event["priceRanges"][0]["max"].to_s
     hash["date"]=Date.strptime(event["dates"]["start"]["localDate"]).strftime('%a, %B %d, %Y') + " to " +  Date.strptime(event["dates"]["start"]["localDate"]).strftime('%a, %B %d, %Y')
     hash["hours"]=Time.strptime(event["dates"]["start"]["localTime"],'%H:%M').strftime('%l:%M %p')
-    geo = address_to_geo(hash['address'])
-    hash["location"] = Location.find_or_create_by(latitude:geo['lat'],longitude:geo['lng'],neighborhood:geo_to_neighborhood(geo))
-    hash["category"] = Category.find_by(name:"Music")
-    binding.pry
+    hash["category"] = music
+    hash["location"] = location
+
+
+    new_event= Event.new(hash)
+    @@search_results << new_event
   end
 
   def get_event

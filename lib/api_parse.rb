@@ -57,17 +57,13 @@ def geo_to_neighborhood(geo)
   n[0]["long_name"]
 end
 
-  def ticketmaster_parse
-    geo= {}
-    geo['lat'] = 40.7319579
-    geo['lng'] = -73.9768964
+def ticketmaster_parse(geo)
   link = "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&latlong=#{geo['lat']},#{geo['lng']}&apikey=9uklioBkyS6ApmJyfrI10SXV5CLNZP32"
   s = Net::HTTP.get_response(URI.parse(link)).body
   data = JSON.parse(s)
-  binding.pry
-  end
+  #data["_embedded"]["events"][0]
+end
 
-puts ticketmaster_parse
 
 # geo= {}
 # geo['lat'] = 40.7319579
