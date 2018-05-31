@@ -29,6 +29,13 @@ class EventsController < ApplicationController
   def info
     # byebug
     @event = @@search_results[params[:id].to_i]
+    @events =[]
+    @events << @event
+    @hash = Gmaps4rails.build_markers(@events) do |event, marker|
+      marker.lat event.location.latitude
+      marker.lng event.location.longitude
+      marker.infowindow event.title + event.address
+    end
   end
 
   def results
