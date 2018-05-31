@@ -1,0 +1,11 @@
+<h1>Log In!</h1>
+
+<%= render 'errors/flash_errors' %>
+
+<%= form_tag sessions_path do %>
+<%= label_tag "Username" %>
+<%= text_field_tag :user_name %>
+<%= label_tag "Password"%>
+<%= password_field_tag :password %>
+<%= submit_tag "Log In" %>
+<%end%>

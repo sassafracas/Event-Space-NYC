@@ -1,3 +1,32 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+ul {
+  float: left;
+  background: #f0f0ed;
+}
+
+.each-event {
+  border: 1px solid #fff;
+  padding-bottom: 10px;
+  border-color: #fff;
+}
+
+
+
+// h3 a{
+//
+//     color: white;
+//     text-align: left;
+//     padding: 14px 16px;
+//     text-decoration: none;
+//     font-family: Helvetica,Arial,sans-serif;
+//     font-weight: 100;
+//     font-size: 14px;
+//     background-color: #163d77
+// }
+
+/* Change the link color to #111 (black) on hover */
+h3 a:hover {
+    background-color: #163d77;
+}

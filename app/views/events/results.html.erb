@@ -1,0 +1,19 @@
+<h1>Here Are Your Results:</h1>
+
+
+<% @events.each do |event_data|%>
+<div>
+  <h2><%= event_data["title"] %></h2>
+  <%= event_data["venue"]%>
+  <%= event_data["address"] %>
+  <%= event_data["address"] %>
+
+  <p><%= truncate(event_data["description"], length: 300, separator: " ")
+
+
+   %></p>
+  <%= form_tag save_path(@user.id), method: 'post' do%>
+    <%= submit_tag "Save Event" %>
+  <% end %>
+</div>
+<% end %>
