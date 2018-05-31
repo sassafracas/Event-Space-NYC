@@ -50,19 +50,24 @@ class UsersController < ApplicationController
   end
 
   def save
+    # binding.pry
+
     if params["event_id"] != nil
       @event = @@search_results[params["event_id"].to_i]
-      geo = address_to_geo(@event.address)
-      # byebug
-
-      @event.location.latitude = geo['lat']
-      @event.location.longitude = geo['lng']
-      @event.location.neighborhood = geo_to_neighborhood(geo)
-      @event.location.save
-      @event.save
+      @event = Event.find_by(title: @event.title)
+      if @event == nil
+        @event = @@search_results[params["event_id"].to_i]
+        geo = address_to_geo(@event.address)
+        @event.location.latitude = geo['lat']
+        @event.location.longitude = geo['lng']
+        @event.location.neighborhood = geo_to_neighborhood(geo)
+        @event.location.save
+        @event.save
+      end
     else
       @event = Event.find(params["database_event_id"].to_i)
     end
+    
     if !@user.events.include?(@event)
       @user.events << @event
     end

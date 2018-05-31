@@ -125,7 +125,9 @@ class EventsController < ApplicationController
     hash["price"]=event["Venue"]["Price"]
     hash["date"]=Date.strptime(event["DateStart"]).strftime('%a, %B %d, %Y') + " to " +  Date.strptime(event["DateEnd"]).strftime('%a, %B %d, %Y')
     hash["hours"]=Time.strptime(event["Venue"]["OpeningHour"],'%H:%M').strftime('%l:%M %p')+" - "+Time.strptime(event["Venue"]["ClosingHour"],'%H:%M').strftime('%l:%M %p')
-    hash["location"] = loc
+    location = Location.new
+    location = loc
+    hash["location"] = location
     hash["category"] = art
     # byebug
     new_event= Event.new(hash)
@@ -146,11 +148,13 @@ class EventsController < ApplicationController
     hash["date"]=Date.strptime(start_time[0]).strftime('%a, %B %d, %Y') + " to " +  Date.strptime(end_time[0]).strftime('%a, %B %d, %Y')
     hash["hours"]=Time.strptime(start_time[1],'%H:%M').strftime('%l:%M %p')+" - "+Time.strptime(end_time[1],'%H:%M').strftime('%l:%M %p')
     hash["price"]=" "
-    loc.latitude = event["venue"]["address"]["latitude"].to_f
-    loc.longitude = event["venue"]["address"]["longitude"].to_f
+    location = Location.new
+
+    location.latitude = event["venue"]["address"]["latitude"].to_f
+    location.longitude = event["venue"]["address"]["longitude"].to_f
 
     hash["category"] = food
-    hash["location"] = loc
+    hash["location"] = location
 
     new_event= Event.new(hash)
     @@search_results << new_event
@@ -167,6 +171,7 @@ class EventsController < ApplicationController
     hash["date"]=Date.strptime(event["dates"]["start"]["localDate"]).strftime('%a, %B %d, %Y') + " to " +  Date.strptime(event["dates"]["start"]["localDate"]).strftime('%a, %B %d, %Y')
     hash["hours"]=Time.strptime(event["dates"]["start"]["localTime"],'%H:%M').strftime('%l:%M %p')
     hash["category"] = music
+    location = Location.new
     location.longitude = event["_embedded"]["venues"][0]["location"]["longitude"]
     location.latitude = event["_embedded"]["venues"][0]["location"]["latitude"]
     hash["location"] = location
