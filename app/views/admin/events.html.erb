@@ -1,0 +1,16 @@
+<br><br><br><br>
+
+<ul class="each-event">
+
+<% @events.each do |e| %>
+<li>
+<%= e.title %>||
+<%= e.location.neighborhood %>
+
+<%= form_tag admin_events_path, method: "delete" do %>
+<%= hidden_field_tag "event_id", e.id  %>
+<%= submit_tag "Delete this Event"  %>
+<% end %>
+</li>
+<% end %>
+</ul>

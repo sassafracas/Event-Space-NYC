@@ -9,6 +9,14 @@ get 'events/info', to: 'events#info'
   resources :locations
   resources :categories
   resources :users
+  resources :admin, only: [:new, :destroy, :delete]
+
+  get '/admin/events', to: 'admin#events'
+  get '/admin/users', to: 'admin#users'
+
+  post '/admin/events', to: 'admin#delete'
+  post '/admin/users', to: 'admin#remove'
+
   get '/', to: 'users#home', as:'home'
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: "sessions#new", as: 'login'

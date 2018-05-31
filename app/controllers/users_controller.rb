@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.valid?
-      redirect_to user_path(@user)
+      redirect_to login_path
     else
       flash[:errors] = @user.errors.full_messages
       redirect_to signup_path
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
     else
       @event = Event.find(params["database_event_id"].to_i)
     end
-    
+
     if !@user.events.include?(@event)
       @user.events << @event
     end
