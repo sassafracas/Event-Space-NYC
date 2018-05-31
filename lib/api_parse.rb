@@ -13,13 +13,31 @@ def parse_api(link)
   # binding.pry
 end
 
-
+#{geo['lat']}#{geo['lng']}
 def nyartbeat_parse(geo , free=1)
   link = "http://www.nyartbeat.com/list/event_searchNear?latitude=#{geo['lat']}&longitude=#{geo['lng']}&SearchRange=3000m&MaxResults=10&SortOrder=distance&free=#{free}"
   s = Net::HTTP.get_response(URI.parse(link)).body
   # binding.pry
   data = JSON.parse(Hash.from_xml(s).to_json)
 end
+
+def ticketmaster_parse(geo)
+  link = "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&latlong=#{geo['lat']},#{geo['lng']}&apikey=9uklioBkyS6ApmJyfrI10SXV5CLNZP32"
+  s = Net::HTTP.get_response(URI.parse(link)).body
+  data = JSON.parse(s)
+  #data["_embedded"]["events"][0]
+end
+
+def eventbrite(geo, category="food", range="15mi")
+
+  api_key = 'TVBPW6RABWSC73XMYW5Y'
+
+  url = "https://www.eventbriteapi.com/v3/events/search/?expand=organizer,venue&location.latitude=#{geo['lat']}&location.longitude=#{geo['lng']}&start_date.keyword=this_week&location.within=#{range}&subcategories=10003&token=#{api_key}"
+  data = parse_api(url)
+
+end
+
+
 
 def address_to_geo(address)
   geo= {}
@@ -57,12 +75,20 @@ def geo_to_neighborhood(geo)
   n[0]["long_name"]
 end
 
-geo= {}
-geo['lat'] = 40.7319579
-geo['lng'] = -73.9768964
-puts geo_to_address(geo)
-puts geo_to_neighborhood(geo)
 
-y = address_to_geo("18 Stuyvesant Oval, new york, new york")
-puts y
+
+# geo= {}
+# geo['lat'] = 40.7319579
+# geo['lng'] = -73.9768964
+# eventbrite(geo)
+
+# geo= {}
+# geo['lat'] = 40.7319579
+# geo['lng'] = -73.9768964
+
+# puts geo_to_address(geo)
+# puts geo_to_neighborhood(geo)
+#
+# y = address_to_geo("18 Stuyvesant Oval, new york, new york")
+# puts y
 # puts nyartbeat_parse(y, 0)

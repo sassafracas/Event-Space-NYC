@@ -26,4 +26,5 @@ helper_method :current_user, :logged_in?, :empty_search
     redirect_to login_path if  !logged_in?
   end
 
+
 end
