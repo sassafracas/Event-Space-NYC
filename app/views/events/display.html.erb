@@ -1,21 +1,29 @@
+<br>
+<br>
+<br>
+
+
 <h1>Here Are Your Results:</h1>
 
 
 <% @events.each_with_index do |event_data, i|%>
-<div>
-  <h2><%= event_data["title"] %></h2>
-  Venue: <%= event_data["venue"]%>
-  Address: <%= event_data["address"] %> <br>
-  Hours: <%= event_data["hours"] %>
-  Date: <%= event_data["date"] %><br>
-  <%= event_data["price"] %>
+<div class="display-page">
+  <div class="each-event">
 
-  <p><%= truncate(event_data["description"], length: 300, separator: " ")%>
-    <%= link_to "See more", controller: "events", action: "info", id: i %>
-   </p>
-  <%= form_tag save_path(@user.id), method: 'post' do%>
-    <%= hidden_field_tag "event_id", i %>
-    <%= submit_tag "Save Event" %>
-  <% end %>
+    <h3><%= link_to event_data["title"], controller: "events", action: "info", id: i %></h3>
+    <p>Venue: <%= event_data["venue"]%></p>
+    <p>Address: <%= event_data["address"] %></p>
+    <p>Hours: <%= event_data["hours"] %></p>
+    <p>Date: <%= event_data["date"] %></p>
+    <%= event_data["price"] %>
+
+    <p><%= truncate(event_data["description"], length: 300, separator: " ")%>
+      <%= link_to "See more", controller: "events", action: "info", id: i %>
+     </p>
+    <%= form_tag save_path(@user.id), method: 'post' do%>
+      <%= hidden_field_tag "event_id", i %>
+      <%= submit_tag "Save Event" %>
+    <% end %>
+  </div>
 </div>
 <% end %>

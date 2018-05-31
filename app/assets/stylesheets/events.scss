@@ -2,14 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// .search input {
-//   height: 20px;
-//   width: 200px;
-// }
+.search input {
+  height: 20px;
+  width: 200px;
+}
+
+h1 {
+  font-size: 40px;
+  font-family: Helvetica,Arial,sans-serif;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  color: #31384c;
+}
 
 .each-event {
-  background: #f0f0ed;
-  opacity: 0.8;
   background: #f0f0ed;
   opacity: 0.8;
   border: 1px solid #fff;
@@ -26,6 +32,20 @@
 }
 
 .each-event p {
-  padding-left: 30px;
+  padding: 0px 30px 0px 30px;
   font-family: Helvetica,Arial,sans-serif;
+}
+
+.display-page {
+  margin-right: 55%;
+}
+
+.show-title {
+  color: #2f4463;
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 30px;
+}
+
+.show-attributes {
+  margin-right: 39%;
 }
