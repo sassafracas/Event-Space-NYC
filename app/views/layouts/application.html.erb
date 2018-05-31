@@ -10,16 +10,20 @@
   </head>
 
   <body>
-    <% if logged_in? %>
-      Hello, <%=current_user.user_name  %>
-      <%= link_to "Show all saved events", current_user %>
-      <%= link_to "Log Out", logout_path, method: :post %>
-      <%= link_to "Search", search_path %>
+    <nav class="main-nav">
+      <ul>
+        <% if logged_in? %>
+          <p>Hello, <%=current_user.user_name  %></p>
+          <li><%= link_to "SHOW ALL SAVED EVENTS", current_user %></li>
+          <li><%= link_to "LOG OUT", logout_path, method: :post %></li>
+          <li><%= link_to "SEARCH", search_path %></li>
 
-    <% else %>
-      <%= link_to "Sign Up", signup_path %>
-      <%= link_to "Login", login_path %>
-    <% end %>
+        <% else %>
+          <li><%= link_to "SIGN UP", signup_path %></li>
+          <li><%= link_to "LOGIN", login_path %></li>
+        <% end %>
+      </ul>
+    </nav>
 
     <%= yield %>
   </body>
