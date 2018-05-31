@@ -4,11 +4,16 @@ class EventsController < ApplicationController
 
   before_action :get_event, only: [:show]
   def index
-    @events = Event.all
+    if logged_in?
+      @events = Event.all
+    else
+      redirect_to home_path
+    end
   end
 
   def search
     empty_search
+
   end
 
   def info
@@ -22,9 +27,17 @@ class EventsController < ApplicationController
     y = address_to_geo(params[:search])
     data = nyartbeat_parse(y, 0)
     @events_from_search = data["Events"]["Event"]
+
+    if @events_from_search == nil
+      flash[:errors] = "Nothing found, please search again."
+
+      redirect_to search_path
+    else
+
     @events_from_search.each{|e| new_event(e)} if @@search_results.empty?
     @events = @@search_results
     redirect_to display_path
+  end
   end
 
   def display

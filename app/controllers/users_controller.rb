@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :get_user, only:[:show, :edit, :update, :destroy, :save]
   before_action :authorized, only: [:edit]
   def home
-
+    @events = Event.top_five
   end
 
   def new

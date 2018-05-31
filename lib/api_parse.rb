@@ -57,12 +57,12 @@ def geo_to_neighborhood(geo)
   n[0]["long_name"]
 end
 
-geo= {}
-geo['lat'] = 40.7319579
-geo['lng'] = -73.9768964
-puts geo_to_address(geo)
-puts geo_to_neighborhood(geo)
-
-y = address_to_geo("18 Stuyvesant Oval, new york, new york")
-puts y
+# geo= {}
+# geo['lat'] = 40.7319579
+# geo['lng'] = -73.9768964
+# puts geo_to_address(geo)
+# puts geo_to_neighborhood(geo)
+#
+# y = address_to_geo("18 Stuyvesant Oval, new york, new york")
+# puts y
 # puts nyartbeat_parse(y, 0)
