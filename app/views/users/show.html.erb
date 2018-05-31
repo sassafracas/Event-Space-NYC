@@ -2,18 +2,21 @@
 <br>
 <br>
 
-<h3><%= @user.full_name %>'s events</h3>
+<!-- <img src="https://render.fineartamerica.com/images/rendered/default/poster/8/10/break/images-medium-5/empire-state-building-new-york-city-usa-sabine-jacobs.jpg" alt="Empire State Building"> -->
+
+<h3 class="username"><%= @user.full_name %>'s Events</h3>
 
 <% if current_user.id == @user.id %>
 <ul>
-  <% @user.events.each do |event| %>
+  <% @user.events.each_with_index do |event,i| %>
     <div class="each-event">
       <h3> <%= link_to event.title, event_path(event)%> </h3>
       <p> <%= event.location.neighborhood %> </p><br>
 
-      <%= form_tag user_path(@user.id), method: "delete" %>
-      <%= hidden_field_tag "event_id", event.id %>
-      <%= submit_tag "Delete this Event" %>
+      <%= form_tag user_path(@user.id), method: "delete" do %>
+      <%= hidden_field_tag "event_id", event.id  %>
+      <%= submit_tag "Delete this Event"  %>
+      <% end %>
     </div>
   <% end %>
 </ul>
