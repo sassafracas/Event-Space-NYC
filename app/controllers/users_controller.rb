@@ -40,10 +40,11 @@ class UsersController < ApplicationController
 
   def destroy
     # byebug
-    event = @user.events.find(params[:event_id])
+    @event = @user.events.find(params["event_id"])
 
-    if event
-      @user.events.delete(event)
+    if @event
+      # event.destroy
+      @user.events.delete(@event)
       redirect_to @user
     end
   end
