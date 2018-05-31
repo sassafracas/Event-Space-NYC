@@ -50,6 +50,10 @@ class EventsController < ApplicationController
   def results
 #if event.category == music // event.category == art
     @user = current_user
+    if params[:search].blank?
+      flash[:errors] = "Please put a valid search option."
+      redirect_to search_path
+    else
     geo = address_to_geo(params[:search])
 
     # binding.pry
@@ -103,6 +107,7 @@ class EventsController < ApplicationController
     @events = @@search_results
     redirect_to display_path
     end
+  end
   end
 
   def display
@@ -161,12 +166,14 @@ class EventsController < ApplicationController
 
     hash["title"]=event["name"]
     hash["venue"]=event["_embedded"]["venues"][0]["name"]
-    hash["address"]=event["_embedded"]["venues"][0]["address"]["line1"]
+    hash["address"]=event["_embedded"]["venues"][0]["address"]["line1"] + ", " + event["_embedded"]["venues"][0]["city"]["name"] + ", " + event["_embedded"]["venues"][0]["state"]["stateCode"]
     hash["description"]=event["url"]
-    hash["price"]=event["priceRanges"][0]["min"].to_s + " to " + event["priceRanges"][0]["max"].to_s
+    hash["price"]="$" + event["priceRanges"][0]["min"].to_s + "0" + " to " + "$" + event["priceRanges"][0]["max"].to_s + "0"
     hash["date"]=Date.strptime(event["dates"]["start"]["localDate"]).strftime('%a, %B %d, %Y') + " to " +  Date.strptime(event["dates"]["start"]["localDate"]).strftime('%a, %B %d, %Y')
     hash["hours"]=Time.strptime(event["dates"]["start"]["localTime"],'%H:%M').strftime('%l:%M %p')
     hash["category"] = music
+    location.longitude = event["_embedded"]["venues"][0]["location"]["longitude"]
+    location.latitude = event["_embedded"]["venues"][0]["location"]["latitude"]
     hash["location"] = location
 
 
