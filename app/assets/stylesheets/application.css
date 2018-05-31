@@ -13,3 +13,66 @@
  *= require_tree .
  *= require_self
  */
+
+ /* .main-nav {
+    z-index: 1001;
+    border: 1px solid #7a7f87;
+    background: #3f4144;
+    font-family: Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    color: #fff
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    min-height: 40px !important;
+ } */
+
+ .main-nav ul{
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     background-color: #7296cc;
+     position: fixed;
+     top: 0;
+     width: 100%;
+ }
+
+ .main-nav p{
+   display: block;
+   color: white;
+   text-align: center;
+   text-decoration: none;
+   font-family: Helvetica,Arial,sans-serif;
+   font-weight: 800;
+   padding: 0px 16px 0px 16px;
+   float: left;
+   font-size: 14px;
+ }
+
+ .main-nav li {
+   display: block;
+   color: white;
+   text-align: center;
+   text-decoration: none;
+   font-family: Helvetica,Arial,sans-serif;
+   font-weight: 100;
+   font-size: 14px;
+   float: left;
+ }
+
+ li a {
+     display: block;
+     color: white;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+     font-family: Helvetica,Arial,sans-serif;
+     font-weight: 100;
+     font-size: 14px;
+ }
+
+ /* Change the link color to #111 (black) on hover */
+ li a:hover {
+     background-color: #163d77;
+ }
