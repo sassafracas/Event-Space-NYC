@@ -15,7 +15,7 @@
     <p>Address: <%= event_data["address"] %></p>
     <p>Hours: <%= event_data["hours"] %></p>
     <p>Date: <%= event_data["date"] %></p>
-    <%= event_data["price"] %>
+    <p>Price: <%= event_data["price"] %></p>
 
     <p><%= truncate(event_data["description"], length: 300, separator: " ")%>
       <%= link_to "See more", controller: "events", action: "info", id: i %>
