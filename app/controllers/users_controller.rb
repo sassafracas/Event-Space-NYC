@@ -40,10 +40,11 @@ class UsersController < ApplicationController
 
   def destroy
     # byebug
-    event = @user.events.find(params[:event_id])
+    @event = @user.events.find(params["event_id"])
 
-    if event
-      @user.events.delete(event)
+    if @event
+      # event.destroy
+      @user.events.delete(@event)
       redirect_to @user
     end
   end
@@ -52,6 +53,10 @@ class UsersController < ApplicationController
     # byebug
     if params["event_id"] != nil
       @event = @@search_results[params["event_id"].to_i]
+      geo={}
+      geo['lat'] = @event.location.latitude
+      geo['lng'] = @event.location.longitude
+      @event.location.neighborhood = geo_to_neighborhood(geo)
       @event.save
     else
       @event = Event.find(params["database_event_id"].to_i)
