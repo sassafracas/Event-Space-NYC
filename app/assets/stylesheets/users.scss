@@ -1,32 +1,54 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.username {
+  font-size: 40px;
+  font-family: Helvetica,Arial,sans-serif;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
 ul {
   float: left;
-  background: #f0f0ed;
 }
 
 .each-event {
+  background: #f0f0ed;
+  opacity: 0.8;
+  background: #f0f0ed;
+  opacity: 0.8;
   border: 1px solid #fff;
+  padding-left: 30px;
   padding-bottom: 10px;
+  padding-right: 10px;
   border-color: #fff;
 }
 
 
+.each-event h3 {
+  color: #2f4463;
+  font-family: Helvetica,Arial,sans-serif;
+}
 
-// h3 a{
-//
-//     color: white;
-//     text-align: left;
-//     padding: 14px 16px;
-//     text-decoration: none;
-//     font-family: Helvetica,Arial,sans-serif;
-//     font-weight: 100;
-//     font-size: 14px;
-//     background-color: #163d77
-// }
+.each-event p {
+  padding-left: 30px;
+  font-family: Helvetica,Arial,sans-serif;
+}
 
-/* Change the link color to #111 (black) on hover */
+body {
+  background-image: url(https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_720,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/scg1hv5gnximtnvkpqb7/EmpireStateBuildingAdmission.jpg);
+  background-repeat: round;
+  background-attachment: fixed;
+}
+
+h3 a {
+    color: #163d77;
+}
+
+h3 a:visited {
+    color: #55739e;
+}
 h3 a:hover {
     background-color: #163d77;
+    color: #ffffff;
 }
