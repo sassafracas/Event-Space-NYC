@@ -21,14 +21,13 @@ def nyartbeat_parse(geo , free=1)
   data = JSON.parse(Hash.from_xml(s).to_json)
 end
 
-def eventbrite(category="food", range="15mi")
+def eventbrite(geo, category="food", range="15mi")
 
   api_key = 'TVBPW6RABWSC73XMYW5Y'
 
-  url = "https://www.eventbriteapi.com/v3/events/search/?expand=organizer,venue&location.address=NYC&location.address=Indore&expand=organizer,venue&start_date.keyword=this_week&location.within=#{range}&subcategories=10003&token=#{api_key}"
+  url = "https://www.eventbriteapi.com/v3/events/search/?expand=organizer,venue&location.latitude=#{geo['lat']}&location.longitude=#{geo['lng']}&start_date.keyword=this_week&location.within=#{range}&subcategories=10003&token=#{api_key}"
   data = parse_api(url)
-  binding.pry
-  true
+
 end
 
 
@@ -69,11 +68,12 @@ def geo_to_neighborhood(geo)
   n[0]["long_name"]
 end
 
-eventbrite
 
-# geo= {}
-# geo['lat'] = 40.7319579
-# geo['lng'] = -73.9768964
+geo= {}
+geo['lat'] = 40.7319579
+geo['lng'] = -73.9768964
+eventbrite(geo)
+
 # puts geo_to_address(geo)
 # puts geo_to_neighborhood(geo)
 #
