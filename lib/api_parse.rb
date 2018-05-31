@@ -22,13 +22,21 @@ def nyartbeat_parse(geo , free=1)
 end
 
 def address_to_geo(address)
+  geo= {}
+  geo['lat'] = 40.7319579
+  geo['lng'] = -73.9768964
+  # byebug
   link = 'https://maps.googleapis.com/maps/api/geocode/json?address='
   key= '&key=AIzaSyB8y9s45xVG7OAhCdYa14p80sQBEiKEgV8'
   address = address.gsub(' ', '+')
   link = link + address + key
   data = parse_api(link)
   # binding.pry
-  data['results'][0]['geometry']['location']
+  if data['results'].count > 0
+    data['results'][0]['geometry']['location']
+  else
+    geo
+  end
 end
 
 def geo_to_address(geo)

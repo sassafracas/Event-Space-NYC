@@ -9,6 +9,10 @@
 <p>Description: <%= @event.description%> </p>
 <p>Latitude: <%= @event.location.latitude %> </p>
 <p>Longitude <%= @event.location.longitude %> </p>
+<%= form_tag save_path(current_user), method: 'post' do%>
+  <%= hidden_field_tag "database_event_id", @event.id %>
+  <%= submit_tag "Save Event" %>
+<% end %><br>
 
 <div style='width: 800px;'>
   <div id="map" style='width: 800px; height: 400px;'></div>
@@ -24,4 +28,7 @@ markers = handler.addMarkers(<%=raw @hash.to_json %>);
 
 </script>
 
+<% if @events.count >0 %>
+<%= link_to "Back to Search Results", display_path %><br>
+<% end %>
 <%= link_to "All Events", events_path %>

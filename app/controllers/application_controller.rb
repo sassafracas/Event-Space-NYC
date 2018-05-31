@@ -1,6 +1,15 @@
 class ApplicationController < ActionController::Base
 require 'pry'
-helper_method :current_user, :logged_in?
+@@search_results = []
+
+helper_method :current_user, :logged_in?, :empty_search
+
+
+  def empty_search
+    while @@search_results.count >0
+      @@search_results.pop
+    end
+  end
 
   def current_user
 
