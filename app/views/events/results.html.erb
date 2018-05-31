@@ -3,17 +3,16 @@
 
 <% @events.each do |event_data|%>
 <div>
-  <h2><%= event_data["Name"] %></h2>
-  <%= event_data["Venue"]["Name"] %>
-  <%= event_data ["Venue"]["Address"] %>
-  <p><%= event_data["Description"][0,300]+"..." %></p>
+  <h2><%= event_data["title"] %></h2>
+  <%= event_data["venue"]%>
+  <%= event_data["address"] %>
+  <%= event_data["address"] %>
+
+  <p><%= truncate(event_data["description"], length: 300, separator: " ")
+
+
+   %></p>
   <%= form_tag save_path(@user.id), method: 'post' do%>
-  <%= hidden_field_tag 'title', event_data["Name"] %>
-  <%= hidden_field_tag 'venue_name', event_data["Venue"]["Name"] %>
-  <%= hidden_field_tag 'address', event_data ["Venue"]["Address"] %>
-  <%= hidden_field_tag 'description', event_data["Description"] %>
-
-
     <%= submit_tag "Save Event" %>
   <% end %>
 </div>
