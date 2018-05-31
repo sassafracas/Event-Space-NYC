@@ -13,9 +13,9 @@ ul {
   float: left;
 }
 
+
+
 .each-event {
-  background: #f0f0ed;
-  opacity: 0.8;
   background: #f0f0ed;
   opacity: 0.8;
   border: 1px solid #fff;
@@ -53,4 +53,35 @@ h3 a:visited {
 h3 a:hover {
     background-color: #163d77;
     color: #ffffff;
+}
+
+.top-five {
+  margin-left: 30px;
+  background: #f0f0ed;
+  opacity: 0.8;
+  border: 1px solid #fff;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  border-color: #fff;
+  float: left;
+}
+
+.top-five a {
+  color: #31384c;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.top-five a:hover {
+  color: #ffffff;
+}
+
+h2 {
+  margin-left: 30px;
+  font-size: 24px;
+  font-family: Helvetica,Arial,sans-serif;
+  padding-left: 10px;
+  color: #31384c;
 }

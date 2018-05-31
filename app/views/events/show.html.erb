@@ -2,17 +2,26 @@
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
 
-<h3><%= @event.title %></h3>
+<br>
+<br>
+<br>
 
-<p>Address: <%=@event.address%> </p>
-<p>Neighborhood: <%= @event.location.neighborhood %> </p>
-<p>Description: <%= @event.description%> </p>
-<p>Latitude: <%= @event.location.latitude %> </p>
-<p>Longitude <%= @event.location.longitude %> </p>
-<%= form_tag save_path(current_user), method: 'post' do%>
-  <%= hidden_field_tag "database_event_id", @event.id %>
-  <%= submit_tag "Save Event" %>
-<% end %><br>
+
+<h3 class="show-title"><%= @event.title %></h3>
+
+<div class="show-attributes">
+  <div class="each-event">
+  <p>Address: <%=@event.address%> </p>
+  <p>Neighborhood: <%= @event.location.neighborhood %> </p>
+  <p>Description: <%= @event.description%> </p>
+  <p>Latitude: <%= @event.location.latitude %> </p>
+  <p>Longitude <%= @event.location.longitude %> </p>
+  <%= form_tag save_path(current_user), method: 'post' do%>
+    <%= hidden_field_tag "database_event_id", @event.id %>
+    <%= submit_tag "Save Event" %>
+  <% end %><br>
+  </div>
+</div>
 
 <div style='width: 800px;'>
   <div id="map" style='width: 800px; height: 400px;'></div>

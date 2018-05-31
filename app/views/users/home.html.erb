@@ -1,8 +1,12 @@
+<br>
+<br>
+<br>
+
 <h1>Welcome to EventSpace by DAS</h1>
 
 <h2>Here Are Our Top Five Events:</h2>
 
-<ol>
+<ol class="top-five">
   <% @events.each do |e| %>
     <li><%= link_to e.title, e%></li>
   <%end%>
