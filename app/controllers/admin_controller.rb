@@ -11,6 +11,7 @@ class AdminController < ApplicationController
 
   def events
     # binding.pry
+
     if current_user.user_name == "admin"
       @user = current_user
       @events = Event.all

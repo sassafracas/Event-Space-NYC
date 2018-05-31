@@ -39,6 +39,8 @@ class EventsController < ApplicationController
     @event.location.longitude = geo['lng']
     @event.location.neighborhood = geo_to_neighborhood(geo)
     @events =[]
+    # binding.pry
+    @search_id = params[:id]
     @events << @event
     @hash = Gmaps4rails.build_markers(@events) do |event, marker|
       marker.lat event.location.latitude
