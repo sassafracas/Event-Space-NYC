@@ -50,6 +50,10 @@ class EventsController < ApplicationController
   def results
 #if event.category == music // event.category == art
     @user = current_user
+    if params[:search].blank?
+      flash[:errors] = "Please put a valid search option."
+      redirect_to search_path
+    else
     geo = address_to_geo(params[:search])
 
     # binding.pry
@@ -103,6 +107,7 @@ class EventsController < ApplicationController
     @events = @@search_results
     redirect_to display_path
     end
+  end
   end
 
   def display
