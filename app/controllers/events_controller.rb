@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :get_event, only: [:show]
   def index
     if logged_in?
-      @events = Event.all
+      @events = Event.all.uniq{|e| e.title}
     else
       redirect_to home_path
     end
