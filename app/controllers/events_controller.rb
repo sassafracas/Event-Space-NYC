@@ -34,9 +34,9 @@ class EventsController < ApplicationController
   def info
     # byebug
     @event = @@search_results[params[:id].to_i]
-    geo={}
-    geo['lat'] = @event.location.latitude
-    geo['lng'] = @event.location.longitude
+    geo = address_to_geo(@event.address)
+    @event.location.latitude = geo['lat']
+    @event.location.longitude = geo['lng']
     @event.location.neighborhood = geo_to_neighborhood(geo)
     @events =[]
     @events << @event
@@ -158,7 +158,7 @@ class EventsController < ApplicationController
 
   def new_music_event(event, music, location)
     hash = {}
-    
+
     hash["title"]=event["name"]
     hash["venue"]=event["_embedded"]["venues"][0]["name"]
     hash["address"]=event["_embedded"]["venues"][0]["address"]["line1"]

@@ -71,6 +71,8 @@ def geo_to_neighborhood(geo)
   link = link + geo['lat'].to_s + ","+ geo['lng'].to_s + key
   data = parse_api(link)
   n=data["results"][0]["address_components"].select{|c| c.values.flatten.include?("neighborhood")}
+  n=data["results"][0]["address_components"].select{|c| c.values.flatten.include?("locality")} if n.empty?
+
   # binding.pry
   n[0]["long_name"]
 end

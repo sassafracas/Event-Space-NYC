@@ -50,12 +50,13 @@ class UsersController < ApplicationController
   end
 
   def save
-    # byebug
     if params["event_id"] != nil
       @event = @@search_results[params["event_id"].to_i]
-      geo={}
-      geo['lat'] = @event.location.latitude
-      geo['lng'] = @event.location.longitude
+      geo = address_to_geo(@event.address)
+      # byebug
+
+      @event.location.latitude = geo['lat']
+      @event.location.longitude = geo['lng']
       @event.location.neighborhood = geo_to_neighborhood(geo)
       @event.location.save
       @event.save
