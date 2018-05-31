@@ -25,5 +25,3 @@ class Event < ApplicationRecord
   end
 
 end
-
-puts Event.top_five
