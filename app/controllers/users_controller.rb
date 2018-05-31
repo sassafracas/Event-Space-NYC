@@ -57,6 +57,7 @@ class UsersController < ApplicationController
       geo['lat'] = @event.location.latitude
       geo['lng'] = @event.location.longitude
       @event.location.neighborhood = geo_to_neighborhood(geo)
+      @event.location.save
       @event.save
     else
       @event = Event.find(params["database_event_id"].to_i)
