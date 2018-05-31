@@ -49,3 +49,23 @@ h1 {
 .show-attributes {
   margin-right: 39%;
 }
+
+.links {
+  margin-right: 39%;
+  background: #f0f0ed;
+  opacity: 0.8;
+  border: 1px solid #fff;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  border-color: #fff;
+}
+
+.links p {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.links a:hover {
+  background-color:  #163d77;
+}

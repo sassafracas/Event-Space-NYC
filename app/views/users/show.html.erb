@@ -14,7 +14,7 @@
   <% @user.events.each_with_index do |event,i| %>
     <div class="each-event">
       <h3> <%= link_to event.title, event_path(event)%> </h3>
-      <p> <%= event.location.neighborhood %> </p><br>
+      <p>Neighborhood: <%= event.location.neighborhood %> </p><br>
 
       <%= form_tag user_path(@user.id), method: "delete" do %>
       <%= hidden_field_tag "event_id", event.id  %>
