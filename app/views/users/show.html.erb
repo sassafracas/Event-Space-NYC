@@ -14,11 +14,13 @@
   <% @user.events.each_with_index do |event,i| %>
     <div class="each-event">
       <h3> <%= link_to event.title, event_path(event), 'data-no-turbolink' => true %> </h3>
-      <p>Neighborhood: <%= event.location.neighborhood %> </p><br>
+      <p>Category: <%= event.category.name %> </p>
+      <p>Date: <%= event.date %> </p>
+      <p>Location: <%= event.location.neighborhood %> </p><br>
 
       <%= form_tag user_path(@user.id), method: "delete" do %>
       <%= hidden_field_tag "event_id", event.id  %>
-      <%= submit_tag "Delete this Event"  %>
+      <%= submit_tag "Delete this Event", class: "button" %>
       <% end %>
     </div>
   <% end %>

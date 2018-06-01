@@ -6,10 +6,18 @@
 
 <%= render 'errors/flash_errors' %>
 
+
 <%= form_tag sessions_path do %>
-<%= label_tag "Username" %>
-<%= text_field_tag :user_name %>
-<%= label_tag "Password"%>
-<%= password_field_tag :password %>
-<%= submit_tag "Log In" %>
+<table>
+  <tr>
+    <td><%= label_tag "Username" %></td>
+    <td><%= text_field_tag :user_name %></td>
+  </tr>
+  <tr>
+    <td><%= label_tag "Password"%></td>
+    <td><%= password_field_tag :password %></td>
+  </tr>
+</table>
+<br>
+<%= submit_tag "Log In", class: "button" %>
 <%end%>
