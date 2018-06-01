@@ -73,23 +73,25 @@ class EventsController < ApplicationController
     when "Art"
       data = nyartbeat_parse(geo, 0)
       @events_from_search = data["Events"]["Event"]
-      if params["sort_search"]["Distance"]
+      if params["Sort_by"]=="distance"
         @events_from_search.sort_by!{|e| e["Distance"]}
-      elsif params["sort_search"]["Date"]
+      elsif params["Sort_by"]== "date"
         @events_from_search.sort_by!{|e| e["DateStart"]}
       end
     when "Food"
-      data = eventbrite(geo)
-      @events_from_search = data["events"]
-      if params["sort_search"]["Date"]
-        @events_from_search.sort_by!{|e| e["start"]["local"]}
+      if params["Sort_by"]== "distance"
+        data = eventbrite(geo)
+        @events_from_search = data["events"]
+      else
+        data = eventbrite(geo, "date")
+        @events_from_search = data["events"]
       end
     when "Music"
       data = ticketmaster_parse(geo)
       @events_from_search = data["_embedded"]["events"]
-      if params["sort_search"]["Distance"]
+      if params["Sort_by"]=="distance"
         @events_from_search.sort_by!{|e| e["distance"]}
-      elsif params["sort_search"]["Date"]
+      elsif params["Sort_by"]== "date"
         @events_from_search.sort_by!{|e| e["dates"]["start"]["localDate"]}
       end
     end
