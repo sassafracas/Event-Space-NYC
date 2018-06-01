@@ -32,7 +32,8 @@ def eventbrite(geo, category="food", range="10mi")
 
   api_key = 'TVBPW6RABWSC73XMYW5Y'
 
-  url = "https://www.eventbriteapi.com/v3/events/search/?expand=organizer,venue&location.latitude=#{geo['lat']}&location.longitude=#{geo['lng']}&start_date.keyword=this_week&location.within=#{range}&subcategories=10003&token=#{api_key}"
+  url = "https://www.eventbriteapi.com/v3/events/search/?sort_by=distance&expand=organizer,venue&location.latitude=#{geo['lat']}&location.longitude=#{geo['lng']}&start_date.keyword=this_week&location.within=#{range}&subcategories=10003&token=#{api_key}"
+  # binding.pry
   data = parse_api(url)
 
 end
