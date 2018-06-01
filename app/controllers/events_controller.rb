@@ -12,7 +12,7 @@ class EventsController < ApplicationController
   end
 
   def show
-
+    @event.address = "NYC" if @event.address == nil
     @events =[]
     @events << @event
     @hash = Gmaps4rails.build_markers(@events) do |event, marker|

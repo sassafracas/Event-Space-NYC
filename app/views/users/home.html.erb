@@ -8,6 +8,6 @@
 
 <ol class="top-five">
   <% @events.each do |e| %>
-    <li><%= link_to e.title, e%></li>
+    <li><%= link_to e.title, e, 'data-no-turbolink' => true%></li>
   <%end%>
 </ol>

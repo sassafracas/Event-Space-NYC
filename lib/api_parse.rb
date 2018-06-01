@@ -28,7 +28,7 @@ def ticketmaster_parse(geo)
   #data["_embedded"]["events"][0]
 end
 
-def eventbrite(geo, category="food", range="15mi")
+def eventbrite(geo, category="food", range="10mi")
 
   api_key = 'TVBPW6RABWSC73XMYW5Y'
 

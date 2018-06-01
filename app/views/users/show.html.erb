@@ -13,7 +13,7 @@
 <ul>
   <% @user.events.each_with_index do |event,i| %>
     <div class="each-event">
-      <h3> <%= link_to event.title, event_path(event)%> </h3>
+      <h3> <%= link_to event.title, event_path(event), 'data-no-turbolink' => true %> </h3>
       <p>Neighborhood: <%= event.location.neighborhood %> </p><br>
 
       <%= form_tag user_path(@user.id), method: "delete" do %>
