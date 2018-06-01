@@ -7,10 +7,14 @@
 <span class="search"><%= text_field_tag :search, params[:search], placeholder: 'Enter the Location Here' %></span>
 <%= radio_button_tag 'search_type', 'Art' %> <label for="Art">Art</label>
 <%= radio_button_tag 'search_type', 'Food' %>  <label for="Food">Food</label>
-<%= radio_button_tag 'search_type', 'Music' %>  <label for="Music">Music</label> <br>
-<%= radio_button_tag 'distance_type', 'Distance' %> <label for="Distance">Search By Distance</label>
-<%= radio_button_tag 'date_type', 'Date' %> <label for="Date">Search By Date</label>
-
+<%= radio_button_tag 'search_type', 'Music' %>  <label for="Music">Music</label>
+<!-- <%= radio_button_tag 'distance_type', 'Distance' %> <label for="Distance">Search By Distance</label>
+<%= radio_button_tag 'date_type', 'Date' %> <label for="Date">Search By Date</label> -->
+<span>Sort by: <select name="Sort by">
+  <option value=" " selected>Select an Option</option>
+  <option value="distance_type">Distance</option>
+  <option value="date_type">Date</option>
+</select>
 
 
 
@@ -22,5 +26,7 @@
 <% if flash[:errors] %><br>
 <h3> <%= flash[:errors] %></h3>
 <% end %>
+
+<br>
 
 <iframe src="https://giphy.com/embed/JIX9t2j0ZTN9S" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/JIX9t2j0ZTN9S"></a></p>
