@@ -19,12 +19,18 @@
   <%= form_tag save_path(current_user), method: 'post' do%>
     <%= hidden_field_tag "database_event_id", @event.id %>
     <%= submit_tag "Save Event" %>
-  <% end %><br>
+  <% end %>
+  <%= form_tag email_path(@event), method: 'post' do %>
+  <%= email_field_tag 'email', current_user.email %>
+  <%= hidden_field_tag "database_event_id", @event.id %>
+  <%= submit_tag "Send" %>
+  <% end %>
+  <br>
   </div>
 </div>
 
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
+<div style='width: 722px;'>
+  <div id="map" style='width: 722px; height: 400px;'></div>
 </div>
 
 <script type="text/javascript">

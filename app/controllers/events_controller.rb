@@ -1,4 +1,6 @@
 require "./lib/api_parse"
+require "./lib/gmail"
+
 
 class EventsController < ApplicationController
 
@@ -24,6 +26,15 @@ class EventsController < ApplicationController
 
 
 
+  end
+
+  def email
+    @event = Event.find(params[:database_event_id])
+    @user = current_user
+    # binding.pry
+    body = @event.address + "\n"+ @event.date + "\n" + @event.hours + "\n" + @event.description
+    mail_that(params["email"], @event.title, body)
+    redirect_to @user
   end
 
   def search

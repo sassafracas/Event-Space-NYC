@@ -46,8 +46,22 @@ def address_to_geo(address)
   # byebug
   link = 'https://maps.googleapis.com/maps/api/geocode/json?address='
   key= '&key=AIzaSyB8y9s45xVG7OAhCdYa14p80sQBEiKEgV8'
-  address = address.gsub(' ', '+')
+  address = "nyc "+address.gsub(' ', '+')
   link = link + address + key
+  data = parse_api(link)
+  # binding.pry
+  if data['results'].count > 0
+    data['results'][0]['geometry']['location']
+  else
+    geo
+  end
+end
+
+
+def address_to_geo_v2(address)
+  link = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address="
+  address = address.gsub(' ', '+')
+  link = link + address
   data = parse_api(link)
   # binding.pry
   if data['results'].count > 0
@@ -92,6 +106,6 @@ end
 # puts geo_to_address(geo)
 # puts geo_to_neighborhood(geo)
 #
-# y = address_to_geo("18 Stuyvesant Oval, new york, new york")
-# puts y
+y = address_to_geo_v2(" NYC Washington St & Front St, Brooklyn, NY 11201")
+puts y
 # puts nyartbeat_parse(y, 0)
