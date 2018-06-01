@@ -78,3 +78,16 @@
  li a:hover {
      background-color: #163d77;
  }
+
+ .button {
+     background-color: #8191c1;
+     border: none;
+     color: white;
+     padding: 15px 32px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     font-size: 16px;
+     cursor: pointer;
+     margin-left: 10px;
+ }

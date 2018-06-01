@@ -59,6 +59,7 @@ h1 {
   padding-bottom: 10px;
   padding-right: 10px;
   border-color: #fff;
+  font-family: Helvetica,Arial,sans-serif;
 }
 
 .links p {
@@ -66,6 +67,17 @@ h1 {
   margin-bottom: 10px;
 }
 
+.links a:visited {
+  background-color: #163d77;
+  color: #163d77;
+}
+
 .links a:hover {
-  background-color:  #163d77;
+  background-color: #163d77;
+  color: #fff;
+}
+
+span {
+  font-family: Helvetica,Arial,sans-serif;
+  margin-left: 10px;
 }

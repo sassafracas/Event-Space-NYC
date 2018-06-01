@@ -22,7 +22,7 @@
      </p>
     <%= form_tag save_path(@user.id), method: 'post' do%>
       <%= hidden_field_tag "event_id", i %>
-      <%= submit_tag "Save Event" %>
+      <%= submit_tag "Save Event", class: "button" %>
     <% end %>
   </div>
 </div>

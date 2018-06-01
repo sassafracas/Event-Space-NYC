@@ -23,9 +23,6 @@ class EventsController < ApplicationController
       marker.infowindow event.title + event.address
     end
     @events = @@search_results
-
-
-
   end
 
   def email

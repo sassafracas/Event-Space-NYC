@@ -16,7 +16,7 @@
   <p>Longitude <%= @event.location.longitude %> </p>
   <%= form_tag save_path(current_user), method: 'post' do%>
     <%= hidden_field_tag "event_id", @search_id %>
-    <%= submit_tag "Save Event" %>
+    <%= submit_tag "Save Event", class: "button" %>
   <% end %>
 </div>
 
