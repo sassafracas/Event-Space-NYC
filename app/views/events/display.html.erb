@@ -10,15 +10,15 @@
 <div class="display-page">
   <div class="each-event">
 
-    <h3><%= link_to event_data["title"], controller: "events", action: "info", id: i %></h3>
+    <h3><%= link_to event_data["title"], controller: "events", action: "info", id: i, 'data-no-turbolink' => true %></h3>
     <p>Venue: <%= event_data["venue"]%></p>
     <p>Address: <%= event_data["address"] %></p>
     <p>Hours: <%= event_data["hours"] %></p>
     <p>Date: <%= event_data["date"] %></p>
-    <%= event_data["price"] %>
+    <p>Price: <%= event_data["price"] %></p>
 
     <p><%= truncate(event_data["description"], length: 300, separator: " ")%>
-      <%= link_to "See more", controller: "events", action: "info", id: i %>
+      <%= link_to "See more", controller: "events", action: "info", id: i, 'data-no-turbolink' => true %>
      </p>
     <%= form_tag save_path(@user.id), method: 'post' do%>
       <%= hidden_field_tag "event_id", i %>

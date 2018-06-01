@@ -65,3 +65,5 @@ gem 'activesupport'
 gem 'json'
 gem "rest-client"
 gem 'gmaps4rails'
+gem "google-api-client"
+gem "mail"

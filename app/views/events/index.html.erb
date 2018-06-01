@@ -7,7 +7,7 @@
 <ul>
   <% @events.each do |event| %>
     <div class="each-event">
-      <h3><%= link_to event.title, event_path(event)%> </h3>
+      <h3><%= link_to event.title, event_path(event), 'data-no-turbolink' => true %> </h3>
       <p>Location: <%= event.location.neighborhood %> </p><br>
     </div>
   <% end %>

@@ -1,4 +1,6 @@
 require "./lib/api_parse"
+require "./lib/gmail"
+
 
 class EventsController < ApplicationController
 
@@ -12,7 +14,7 @@ class EventsController < ApplicationController
   end
 
   def show
-
+    @event.address = "NYC" if @event.address == nil
     @events =[]
     @events << @event
     @hash = Gmaps4rails.build_markers(@events) do |event, marker|
@@ -21,6 +23,15 @@ class EventsController < ApplicationController
       marker.infowindow event.title + event.address
     end
     @events = @@search_results
+  end
+
+  def email
+    @event = Event.find(params[:database_event_id])
+    @user = current_user
+    # binding.pry
+    body = @event.address + "\n"+ @event.date + "\n" + @event.hours + "\n" + @event.description
+    mail_that(params["email"], @event.title, body)
+    redirect_to @user
   end
 
   def search
@@ -36,6 +47,8 @@ class EventsController < ApplicationController
     @event.location.longitude = geo['lng']
     @event.location.neighborhood = geo_to_neighborhood(geo)
     @events =[]
+    # binding.pry
+    @search_id = params[:id]
     @events << @event
     @hash = Gmaps4rails.build_markers(@events) do |event, marker|
       marker.lat event.location.latitude
