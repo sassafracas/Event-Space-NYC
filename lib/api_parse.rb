@@ -28,11 +28,12 @@ def ticketmaster_parse(geo)
   #data["_embedded"]["events"][0]
 end
 
-def eventbrite(geo, category="food", range="10mi")
+def eventbrite(geo, sort="distance", category="food", range="10mi")
+
 
   api_key = 'TVBPW6RABWSC73XMYW5Y'
 
-  url = "https://www.eventbriteapi.com/v3/events/search/?sort_by=distance&expand=organizer,venue&location.latitude=#{geo['lat']}&location.longitude=#{geo['lng']}&start_date.keyword=this_week&location.within=#{range}&subcategories=10003&token=#{api_key}"
+  url = "https://www.eventbriteapi.com/v3/events/search/?sort_by=#{sort}&expand=organizer,venue&location.latitude=#{geo['lat']}&location.longitude=#{geo['lng']}&start_date.keyword=this_week&location.within=#{range}&subcategories=10003&token=#{api_key}"
   # binding.pry
   data = parse_api(url)
 
