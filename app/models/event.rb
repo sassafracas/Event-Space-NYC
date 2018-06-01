@@ -21,8 +21,8 @@ class Event < ApplicationRecord
   end
 
   def self.top_five
-    
-    self.all.sort_by{|event| event.users.count}[0..4]
+
+    self.all.uniq.sort_by{|event| event.users.count}[0..4]
 
   end
 
