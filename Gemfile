@@ -67,3 +67,4 @@ gem "rest-client"
 gem 'gmaps4rails'
 gem "google-api-client"
 gem "mail"
+gem 'rspec-rails'
