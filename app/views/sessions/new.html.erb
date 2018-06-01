@@ -3,9 +3,12 @@
 <br>
 
 <h1>Log In!</h1>
-
-<%= render 'errors/flash_errors' %>
-
+<% if flash[:errors] %>
+  <ul>
+  <%= flash[:errors] %>
+</ul>
+<% end %>
+<br>
 
 <%= form_tag sessions_path do %>
 <table>
