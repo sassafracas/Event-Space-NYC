@@ -14,9 +14,12 @@
   <p>Address: <%=@event.address%> </p>
   <p>Neighborhood: <%= @event.location.neighborhood %> </p>
   <p>Description: <%= @event.description%> </p>
+
+  <% if !@user.events.include?(@event) %>
   <%= form_tag save_path(current_user), method: 'post' do%>
     <%= hidden_field_tag "database_event_id", @event.id %>
     <%= submit_tag "Save Event", class: "button" %>
+  <% end %>
   <% end %>
 
   <br>

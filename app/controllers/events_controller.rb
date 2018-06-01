@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @event.address = "NYC" if @event.address == nil
     @events =[]
     @events << @event
